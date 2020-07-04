@@ -1,5 +1,5 @@
 # malaysiaSimpleCovidDashboard
-A simple covid dashboard that pulls data from the covid19api website and produces charts to visualise the data.
+A simple covid dashboard that pulls the latest data from the covid19api website, saves it to a database and produces plotly charts to visualise the data.
 
 ![2020-07-04 17-10-13](https://user-images.githubusercontent.com/67821956/86509304-8864f900-be19-11ea-994d-ff403ccf27dd.gif)
 
