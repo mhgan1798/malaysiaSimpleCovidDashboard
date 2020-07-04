@@ -1,4 +1,4 @@
-#### Covid Dashboard for Malaysian States
+#### Covid Dashboard for Malaysia
 #### Howard Gan
 #### 2020-07-03
 
@@ -24,7 +24,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output, State
 
 # %% Set defaults here
-os.chdir(r"") # Set your working directory (parent folder) here
+os.chdir(r"C:\Users\HowardG\Google Drive\pythonProjects\development\covidDashboard")
 pio.templates.default = "simple_white"
 
 # %% Load in data from the database
