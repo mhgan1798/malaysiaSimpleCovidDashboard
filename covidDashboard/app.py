@@ -82,17 +82,6 @@ plot_cumulative = px.line(
 plot_cumulative.for_each_annotation(lambda a: a.update(text=a.text.split("=")[-1]))
 plot_cumulative.update_yaxes(title_text="")
 plot_cumulative.update_layout(hovermode="x")
-# plot_cumulative.show()
-
-# plot_confirmed = px.line(plotData, x="Date", y="Confirmed", title="Confirmed")
-# plot_deaths = px.line(plotData, x="Date", y="Deaths", title="Deaths")
-# plot_recovered = px.line(plotData, x="Date", y="Recovered", title="Recovered")
-# plot_active = px.line(plotData, x="Date", y="Active", title="Active")
-
-# plot_confirmed.show()
-# plot_deaths.show()
-# plot_recovered.show()
-# plot_active.show()
 
 
 # %% Perform diff on the plotData dataframes to see daily changes
@@ -279,8 +268,6 @@ app.layout = html.Div(
         dcc.Graph(id="plot_new_deaths", figure=plot_new_deaths),
     ]
 )
-
-# %% Write callbacks
 
 
 # %% Run the app
