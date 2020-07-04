@@ -24,7 +24,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output, State
 
 # %% Set defaults here
-# os.chdir(r"") # Add your working directory here
+os.chdir(r"") # Set your working directory (parent folder) here
 pio.templates.default = "simple_white"
 
 # %% Load in data from the database
@@ -72,15 +72,22 @@ plotData = df[["Country", "Confirmed", "Deaths", "Recovered", "Active", "Date"]]
 )
 
 # Produce a plot to show the cumulative situation
+pData = plotData.drop("Country", axis=1).melt("Date")
 plot_cumulative = px.line(
-    data_frame=plotData.drop("Country", axis=1).melt("Date"),
+    data_frame=pData,
     x="Date",
     y="value",
     facet_col="variable",
+    range_y=[min(pData.value), max(pData.value)]
     # title="Cumulative plots",
 )
 plot_cumulative.for_each_annotation(lambda a: a.update(text=a.text.split("=")[-1]))
-plot_cumulative.update_yaxes(title_text="")
+plot_cumulative.update_yaxes(
+    title_text="",
+    matches="y",
+    fixedrange=True,
+    range=[min(pData.value), max(pData.value)],
+)
 plot_cumulative.update_layout(hovermode="x")
 
 
@@ -125,7 +132,7 @@ plot_new_cases.add_trace(
     )
 )
 plot_new_cases.update_layout(legend_orientation="h", title="New confirmed cases")
-# plot_new_cases.show()
+plot_new_cases.layout.yaxis.fixedrange = True
 
 # %% Make a plot for new recoveries
 # y-limits for deaths and recoveries
@@ -152,7 +159,7 @@ plot_new_recovered.add_trace(
     )
 )
 plot_new_recovered.update_layout(legend_orientation="h", title="Daily recoveries")
-# plot_new_recovered.show()
+plot_new_recovered.layout.yaxis.fixedrange = True
 
 # %% Make a plot for new deaths
 plot_new_deaths = go.Figure()
@@ -170,7 +177,7 @@ plot_new_deaths.add_trace(
     )
 )
 plot_new_deaths.update_layout(legend_orientation="h", title="Daily deaths")
-# plot_new_deaths.show()
+plot_new_deaths.layout.yaxis.fixedrange = True
 
 # %% Call in the function that generates a table in html
 def generate_table(dataframe, max_rows=26):
@@ -268,6 +275,8 @@ app.layout = html.Div(
         dcc.Graph(id="plot_new_deaths", figure=plot_new_deaths),
     ]
 )
+
+# %% Write callbacks
 
 
 # %% Run the app
