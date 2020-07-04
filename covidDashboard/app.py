@@ -24,7 +24,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output, State
 
 # %% Set defaults here
-os.chdir(r"C:\Users\HowardG\Google Drive\pythonProjects\development\covidDashboard")
+# os.chdir(r"") # Add your working directory here
 pio.templates.default = "simple_white"
 
 # %% Load in data from the database
